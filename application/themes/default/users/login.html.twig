@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="index,follow">
+        <meta name="revisit-after" content="1 days">
+        <meta name="language" content="en">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="google-site-verification">
+        <meta name="author" content="{{ site_name }}">
+        <meta name="generator" content="{{ site_name }}">
+        <meta name="keywords" content="">
+        <meta name="description" content="{{ site_description }}">
+        <title>{{ title }}</title>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ base_url('/public/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/style.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/plugins.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/demo.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-banner text-center">
+                        <h1><i class="fa fa-gears"></i> {{ site_name }}</h1>
+                    </div>
+                    <div class="portlet portlet-green">
+                        <div class="portlet-heading login-heading">
+                            <div class="portlet-title">
+                                <h4><strong>Login to {{ site_name }}</strong>
+                                </h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="{{base_url('admin/users/add')}}">
+                                    <button class="btn btn-white btn-xs"><i class="fa fa-plus-circle"></i> Nuevo Usuario</button>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="portlet-body">
+                            {{ validation_errors() }}
+                            <form accept-charset="UTF-8" role="form" method="post">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Usuario o E-mail" name="username" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Password" autocomplete="false" name="password" type="password" value="">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="remember" type="checkbox" value="Remember Me">Continuar conectado
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-lg btn-green btn-block">Iniciar Sesion</button>
+                                </fieldset>
+                                <br>
+                                <p class="small">
+                                    <a href="login.html#">¿Olvidaste tu contraseña?</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{{ base_url('/public/js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ base_url('/public/js/bootstrap.min.js') }}"></script>
+    </body>
+</html>

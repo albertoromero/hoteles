@@ -1,4 +1,6 @@
-hoteles
-=======
+Test de Catalogo de Hoteles
+=====================
 
-Catalogo de hoteles para test
+## Responsable
+
+* [Alberto Romero](http://albertoromero.info/)

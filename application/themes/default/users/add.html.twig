@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="index,follow">
+        <meta name="revisit-after" content="1 days">
+        <meta name="language" content="en">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="google-site-verification" content="Kg1pfgXqW8SjjeFpnrGfTHcEtXL-g-fq_x2eht3nZJc">
+        <meta name="author" content="{{ site_name }}">
+        <meta name="generator" content="{{ site_name }}">
+        <meta name="keywords" content="">
+        <meta name="description" content="{{ site_description }}">
+        <title>{{ title }}</title>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ base_url('/public/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/style.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/plugins.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/demo.css') }}">
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="login-banner text-center">
+                    <h1><i class="fa fa-gears"></i> {{ site_name }}</h1>
+                </div>
+                <div class="portlet portlet-green">
+                    <div class="portlet-body">
+                        {{ validation_errors() }}
+                        <form accept-charset="UTF-8" role="form" method="post">
+                            <h4 class="page-header"><i class="fa fa-user fa-fw"></i>Datos de Acesso:</h4>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <input name="email" type="email" class="form-control" placeholder="usuario@email.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Usuario</label>
+                                <input name="username" type="text" class="form-control" placeholder="Usuario">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input name="password" type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirme el Password</label>
+                                <input name="repassword" type="password" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-labeled btn-green">
+                                <span class="btn-label"><i class="fa fa-check"></i></span>Registrarse
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{{ base_url('/public/js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ base_url('/public/js/bootstrap.min.js') }}"></script>
+    </body>
+</html>

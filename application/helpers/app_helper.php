@@ -253,4 +253,29 @@ if (!function_exists('small_name')) {
             return $nome;
         }
     }
+
+
+    /**
+     * Show flassh success message
+     * @param string $message
+     * @return string
+     */
+    if (!function_exists('flashSuccess')) {
+        function flashSuccess()
+        {
+            $CI =& get_instance();
+            $msg = $CI->session->flashdata(App::MSG_SUCCESS);
+            if (!empty($msg)) {
+                printf(
+                    '<div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>%s:</strong> %s
+                    </div>',
+                   ucfirst(App::MSG_SUCCESS),
+                    $msg
+                );
+            }
+        }
+    }
+
 }

@@ -20,9 +20,68 @@ class Users extends AdminController
         $this->display('Users/index');
     }
 
+
+    /**
+     * Make Login
+     *
+     * @param string username
+     * @param string password
+     * @return boolean
+     */
+    private function doLogin($username, $password)
+    {
+        if ($data = $this->User->checkUser($username, $password)) {
+            return $this->setSession($data);
+        }
+        return false;
+    }
+
     public function login()
     {
+        if ($this->getCurUser()) {
+            if ($this->input->is_ajax_request()) {
+                $msg['success'] = 'Espere...';
+                $msg['redirect'] = site_url('/panel');
+                $this->outputJson($msg);
+            } else {
+                redirect('/panel');
+            }
+        }
+
+        if ($this->input->post()) {
+            $username = trim($this->input->post('username'));
+            $password = trim($this->input->post('password'));
+
+            $this->form_validation->set_rules('username', 'Usuario', 'trim|required');
+            $this->form_validation->set_rules('password', 'Password', 'trim|required');
+
+            if ($this->form_validation->run()) {
+                $username = trim($this->input->post('username'));
+                $password = trim($this->input->post('password'));
+
+                if (!$this->doLogin($username, $password)) {
+                    //$this->session->set_flashdata('error_login', 'Login y/o password invalidos.');
+                    $this->form_validation->set_post_validation_error('error_login', 'Login y/o password invalidos.');
+                } else {
+                    redirect('/panel');
+                }
+            }
+        }
         $this->display('users/login');
+    }
+
+    
+    /**
+     * Logoff a user
+     *
+     */
+    public function logout()
+    {
+        if (!$this->getCurUser()) {
+            redirect('/');
+        }
+        $this->session->sess_destroy();
+        redirect('/');
     }
 
     /**
@@ -52,12 +111,26 @@ class Users extends AdminController
                 if ($user && !empty($user)) {
                     $this->session->set_flashdata(App::MSG_SUCCESS, 'Registrado correctamente!');
                     if ($this->doLogin($username, $password)) {
-                        redirect('/painel');
+                        redirect('/panel');
                     }
                 }
            }
         }
         $this->title('Registro')->display('users/add');
+    }
+
+    /**
+     * Set the Session
+     *
+     * @param array data
+     */
+    private function setSession(array $data)
+    {
+        if (!empty($data) && is_array($data) && isset($data['id'])) {
+            $this->session->set_userdata(array('user_logged' => $data));
+            return true;
+        }
+        return false;
     }
 
 }

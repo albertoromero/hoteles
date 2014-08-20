@@ -43,10 +43,9 @@ $route['404_override'] = '';
 
 $route['admin']								 = 'admin/users/login';
 $route['login']                              = 'admin/users/login';
-$route['logout']                             = 'users/logout';
+$route['logout']                             = 'admin/users/logout';
+
 $route['page/(:any)']                        = 'page/view/$1';
-$route['admin/login']                        = 'admin/users/login';
-$route['admin/logout']                       = 'admin/users/logout';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

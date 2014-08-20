@@ -19,6 +19,12 @@ class CommonController extends CI_Controller
         $this->set('site_description', $this->config->item('site_description'), true);
         $this->set('current_page', strtolower($this->app->getCurrentPage()), true);
 
+        //If the user is logged set datauser on a variable _CURUSER
+        if ($userdata = $this->getCurUser()) {
+            $this->_twiggy = $this->config->item('twiggy');
+            $this->set('_CURUSER', $userdata, true);
+            $this->set('_panel', '_panel/' .$this->_twiggy['default_layout']. $this->_twiggy['template_file_ext'], true);
+        }
         log_message('debug', 'AppController Class Initialized');
     }
 
@@ -51,6 +57,25 @@ class CommonController extends CI_Controller
     {
         return $this->app->outputJson($data, $cache);
     }
+
+    /**
+     * Verifies if a user is logged
+     *
+     */
+    protected function checkIsLoged()
+    {
+        return $this->app->checkIsLoged();
+    }
+
+    /**
+     * Catch user's data
+     *
+     * @param string key
+     */
+    protected function getCurUser($key = false)
+    {
+        return $this->app->getCurUser($key);
+    }
 }
 
 
@@ -67,10 +92,10 @@ class AppController extends CommonController
 
 class AdminController extends CommonController
 {
-    public function checkIsLoged() 
+    public function __construct()
     {
-        return $this->app->checkIsLoged();
-        return true;
+        parent::__construct();
+        log_message('debug', 'AdminController Class Initialized');
     }
 }
 /* End of file AppController.php */

@@ -1377,6 +1377,29 @@ class CI_Form_validation {
 		return str_replace(array('<?php', '<?PHP', '<?', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
 	}
 
+
+	/**
+	 * Generate a error
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	string
+	 */
+    function set_post_validation_error($field, $message)
+    {
+        if(! isset($this->_field_data[$field]))
+        {
+            $this->_field_data[$field]['postdata'] = '';
+        }
+        
+        $this->_field_data[$field]['error'] = $message;
+        
+        if ( ! isset($this->_error_array[$field]))
+        {
+            $this->_error_array[$field] = $message;
+        }
+    }	
+
 }
 // END Form Validation Class
 

@@ -16,6 +16,7 @@ class App
      * Nome da sessão para armazenar os dados do usuário logado
      */
     const SESSION_NAME_AUTH = 'user_logged';
+    const MSG_SUCCESS = 'Exito';
 
     /**
      * Açoes que podem ser executadas na view

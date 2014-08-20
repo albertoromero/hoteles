@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="index,follow">
+        <meta name="revisit-after" content="1 days">
+        <meta name="language" content="en">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="google-site-verification">
+        <meta name="author" content="{{ site_name }}">
+        <meta name="generator" content="{{ site_name }}">
+        <meta name="keywords" content="">
+        <meta name="description" content="{{ site_description }}">
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="{{ base_url('/public/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/font-awesome.min.css') }}">
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ base_url('/public/css/style.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/plugins.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/demo.css') }}">
+        <link rel="stylesheet" href="{{ base_url('/public/css/pace.css') }}">
+    </head>
+
+    <body>
+        <div id="wrapper">
+            {{ flashSuccess() }}
+            <nav class="navbar-top navbar-fixed-top" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <i class="fa fa-bars"></i> Menu
+                    </button>
+                    <div class="navbar-brand">
+                        <a href="index.html">
+                            Administration
+                        </a>
+                    </div>
+                </div>
+                <div class="nav-top">
+                    <ul class="nav navbar-left">
+                        <li class="tooltip-sidebar-toggle">
+                            <a href="blank.html#" id="sidebar-toggle" data-toggle="tooltip" data-placement="right" title="Sidebar Toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-right">
+                        <li class="dropdown">
+                            <a href="blank.html#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>  <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <a href="{{ site_url('/users/profile') }}">
+                                        <i class="fa fa-user"></i> Perfil
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ site_url('/users/edit') }}">
+                                        <i class="fa fa-gear"></i> Ajustes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="logout_open" href="{{ site_url('/logout') }}">
+                                        <i class="fa fa-sign-out"></i> Salir
+                                        <strong>{{ _CURUSER.username }}</strong>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="navbar-side" role="navigation">
+                <div class="navbar-collapse sidebar-collapse collapse">
+                    <ul id="side" class="nav navbar-nav side-nav">
+                        <li class="side-user hidden-xs">
+                            <img src="{{ get_gravatar(_CURUSER.email, 150) }}" class="img-circle" alt="{{ _CURUSER.name }}" />
+                            <p class="welcome">
+                                <i class="fa fa-key"></i> Welcome
+                            </p>
+                            <p class="name tooltip-sidebar-logout">
+                                {{ _CURUSER.email }}
+                                <span class="last-name">Salir!</span> <a style="color: inherit" class="logout_open" href="{{ site_url('logout') }}" data-toggle="tooltip" data-placement="top" title="Salir"><i class="fa fa-sign-out"></i></a>
+                            </p>
+                            <div class="clearfix"></div>
+                        </li>
+                        <li>
+                            <a href="{{ site_url('panel') }}">
+                                <i class="fa fa-dashboard"></i> Panel
+                            </a>
+                        </li>
+                        <li class="panel">
+                            <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#hotels">
+                                <i class="fa fa-home"></i> Hoteles <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="collapse nav" id="hotels">
+                                <li>
+                                    <a href="{{ site_url('hotels/add') }}">
+                                        <i class="fa fa-angle-double-right"></i> Nuevo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ site_url('hotels') }}">
+                                        <i class="fa fa-angle-double-right"></i> Mis Hoteles
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div id="page-wrapper">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="page-title">
+                                <h1>
+                                    {{ page_title }}
+                                    <small>{{ page_description }}</small>
+                                </h1>
+                                <ol class="breadcrumb">
+                                    <li><i class="fa fa-dashboard"></i>  <a href="{{ site_url('panel') }}">Panel</a>
+                                    </li>
+                                    <li class="active">{{ page_description }}</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{ flashSuccess() }}
+                        {{ validation_errors() }}
+                        {% block content %}
+                            Content
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <p class="footer-logo">{{ site_name }}</p>
+                <p class="direitos">
+                    {{ now|date('Y') }}&copy;&nbsp;{{ site_name }}&nbsp;-&nbsp;Todos os direitos Reservados.&nbsp;
+                    <span>Versão:
+                        <strong>
+                            <span>{{ site_version|default('1.0.0') }}</span>
+                        </strong>
+                    </span>
+                    {% if site_enviroment == 'development' %}
+                        <span class="label label-danger" id="ver-dev">developer</span>
+                    {% endif -%}
+                </p>
+            </div>
+            {% block models %}
+            {% endblock %}
+        </div>
+        <script src="{{ base_url('/public/js/pace.js') }}"></script>
+        <script src="{{ base_url('/public/js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ base_url('/public/js/bootstrap.min.js') }}"></script>
+        <script src="{{ base_url('/public/js/jquery.slimscroll.min.js') }}"></script>
+        <script src="{{ base_url('/public/js/hisrc.js') }}"></script>
+        <script src="{{ base_url('/public/js/flex.js') }}"></script>
+    </body>
+</html>

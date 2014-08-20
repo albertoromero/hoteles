@@ -1,0 +1,9 @@
+RewriteEngine On
+Options +FollowSymLinks
+RewriteCond %{HTTP_HOST} ^www\.(.*)
+RewriteRule (.*) http://%1/$1 [R=301,L]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+

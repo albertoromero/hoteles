@@ -131,7 +131,7 @@ class App
                 );
                 exit;
             } else {
-                redirect('/admin/login');
+                redirect('login');
             }
         }
     }

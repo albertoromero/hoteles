@@ -1,0 +1,83 @@
+{% extends _panel %}
+{% block content %}
+<div class="col-lg-12">
+    <div class="portlet portlet-default">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h4>Registro de Actividad</h4>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="portlet-body">
+            <h4>Descripcion</h4>
+            <form accept-charset="UTF-8" role="form" method="post">
+                <textarea class="form-control" name="description" placeholder="Descripcion"></textarea>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h4>Tipo</h4>
+                        <select class="form-control" name="type">
+                            <option value=0>(Seleccionar)</option>
+                            <option value={{ constant('App::OPT_RUN') }}>Correr</option>
+                            <option value={{ constant('App::OPT_BIKE') }}>Bicicleta</option>
+                            <option value={{ constant('App::OPT_SWIM') }}>Natacion</option>
+                            <option value={{ constant('App::OPT_WALK') }}>Andar</option>
+                            <option value={{ constant('App::OPT_OTHER') }}>Otros</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4>Duracion</h4>
+                        <input type="time" name="time" class="form-control" placeholder="01:30">
+                    </div>
+                    <div class="col-lg-4">
+                        <h4>Fecha</h4>
+                        <input type="date" name="created" class="form-control" placeholder="01/01/2014">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h4>Max. Pulsaciones</h4>
+                        <input type="number" name="maxpulses" class="form-control" placeholder="180">
+                    </div>
+                    <div class="col-lg-4">
+                        <h4>Min. Pulsaciones</h4>
+                        <input type="number" name="minpulses" class="form-control" placeholder="130">
+                    </div>
+                    <div class="col-lg-4">
+                        <h4>Vueltas</h4>
+                        <input type="number" step="any" name="laps" class="form-control" placeholder="2.5">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <h4>Velocidad Media</h4>
+                            <input type="number" step="any" name="avgspeed" class="form-control" placeholder="7.2">
+                        </div>
+                        <div class="col-lg-4">
+                            <h4>Calorias Quemadas</h4>
+                            <div class="input-append bootstrap-timepicker input-group">
+                                <input type="number" step="any" name="calories" id="calories" class="form-control" placeholder="1100.1">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default add-on" type="button" title="Calcular" data-toggle="modal" data-target="#caloriesModal">
+                                        <i class="fa fa-lightbulb-o"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-labeled btn-green">
+                                <span class="btn-label"><i class="fa fa-check"></i></span>Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

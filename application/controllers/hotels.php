@@ -102,4 +102,17 @@ class Hotels extends AppController {
              ->display('hotels/add_2');
     }
 
+    public function delete($hotel_id) {
+        $result = $this->Hotel->getById($hotel_id);
+        if ($hotel_id != null && is_numeric($hotel_id)) {
+            if($this->Hotel->delete($hotel_id)) {
+                $this->session->set_flashdata(App::MSG_SUCCESS, 'Eliminado correctamente!');
+                redirect(site_url('hotels'));
+            } else {
+                $this->session->set_flashdata('Error', 'No fue posible eliminar el registro!');
+                redirect(site_url('hotels'));
+            }
+        }
+    }
+
 }

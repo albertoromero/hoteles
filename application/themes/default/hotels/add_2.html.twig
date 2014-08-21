@@ -4,7 +4,7 @@
     <div class="portlet portlet-default">
         <div class="portlet-heading">
             <div class="portlet-title">
-                <h4>Habitaciones</h4>
+                <h4>{{ hotel.name }}</h4>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -27,12 +27,59 @@
                     <div class="form-group">
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-labeled btn-green">
-                                <span class="btn-label"><i class="fa fa-check"></i></span>Imagenes
+                                <span class="btn-label"><i class="fa fa-check"></i></span>Guardar
                             </button>
                         </div>
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="portlet portlet-default">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h4>Habitaciones</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="basic-form-elements.html#rooms"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="rooms" class="panel-collapse collapse">
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for room in rooms %}
+                            <tr>
+                                <td>{{ room.id }}</td>
+                                <td>{{ room.name }}</td>
+                                <td>
+                                    <a href="{{ site_url('rooms/add/'~room.id) }}" title="Habitaciones">
+                                        <button class="btn btn-default add-on" type="button"><i class="fa fa-home"></i></button>
+                                    </a>
+                                    <a href="{{ site_url('rooms/edit/'~room.id) }}" title="Editar">
+                                        <button class="btn btn-info add-on" type="button"><i class="fa fa-edit"></i></button>
+                                    </a>
+                                    <a href="{{ site_url('rooms/delete/'~room.id) }}" title="Eliminar">
+                                        <button class="btn btn-red add-on" type="button"><i class="fa fa-trash-o"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

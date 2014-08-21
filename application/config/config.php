@@ -1,6 +1,6 @@
 <?php  defined('BASEPATH') or exit('No direct script access allowed');
 
-$config['site_name'] = 'Codeigniter';
+$config['site_name'] = 'Hoteles';
 $config['site_description'] = '';
 $config['site_version'] = 'TEST Alberto Romero';
 $config['email_replay'] = 'contacto@albertoromero.info';

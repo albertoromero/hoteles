@@ -69,7 +69,7 @@ class Hotels extends AppController {
      * Add room to database
      *
      */
-    public function add_2()
+    public function add_2($hotels_id = null)
     {
         if ($this->input->post()) {
             $this->form_validation->set_rules('name', 'Nombre', 'trim|required');
@@ -84,18 +84,21 @@ class Hotels extends AppController {
                     array(
                         'name' => $name,
                         'description' => $description,
-                        'hotels_id' => $hotel_id
+                        'hotels_id' => $hotels_id
                     )
                 );
 
                 if ($room && !empty($room)) {
                     $this->session->set_userdata('lastRoomId', $room);
                     $this->session->set_flashdata(App::MSG_SUCCESS, 'Registrado correctamente!');
-                    redirect(site_url('hotels/add_2'));
+                    redirect(site_url('hotels/add_2/'.$hotels_id));
                 }
            }
         }
+
         $this->title('Habitaciones')
+             ->set('rooms', $this->Room->getAllBy('hotels_id', $hotels_id))
+             ->set('hotel', $this->Hotel->getById($hotels_id))
              ->display('hotels/add_2');
     }
 

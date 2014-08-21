@@ -117,6 +117,13 @@ class AppModel extends CI_Model
         return isset($result[0]) ? $result[0] : false;
     }
 
+    public function getAllBy($key, $value = null)
+    {
+        $this->db->where($key, $value);
+        $result = $this->getAll();
+        return $result;
+    }
+
     public function getCount($published = true)
     {
         if ($this->checkIsSetTable()) {
@@ -164,11 +171,10 @@ class AppModel extends CI_Model
     public function delete($id = false)
     {
         if ($this->checkIsSetTable() && $id) {
-            $this->db->where($this->field_primary_key, $id);
-            if ($this->db->field_exists($this->field_published, $this->table)) {
-                $this->db->update($this->table, array($this->field_published => false));
+            $this->db->where($this->table.'.'.$this->field_primary_key, $id);
+            if ($this->db->delete($this->table)) {
+                return true;
             }
-            return true;
         }
         return false;
     }

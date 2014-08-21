@@ -1400,6 +1400,27 @@ class CI_Form_validation {
         }
     }	
 
+
+    /**
+     * valid_date
+     *
+     * Verify valid date format d/m/Y
+     *
+     * @access  public
+     * @param   string
+     * @return  bool
+     */
+    function valid_date($date, $format = 'd/m/Y')
+    {
+        $format = $format !== false ? $format : 'd/m/Y';
+        app()->form_validation->set_message('valid_date', 'Campo %s incorrecto.');
+
+        $v_date = date_create_from_format($format, $date);
+        if ($v_date) {
+            $v_date = date_format($v_date, $format);
+        }
+        return ($v_date && $v_date == $date);
+    }
 }
 // END Form Validation Class
 

@@ -60,7 +60,6 @@ class Users extends AdminController
                 $password = trim($this->input->post('password'));
 
                 if (!$this->doLogin($username, $password)) {
-                    //$this->session->set_flashdata('error_login', 'Login y/o password invalidos.');
                     $this->form_validation->set_post_validation_error('error_login', 'Login y/o password invalidos.');
                 } else {
                     redirect('/panel');

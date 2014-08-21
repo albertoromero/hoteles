@@ -2,8 +2,8 @@
 
 $config['site_name'] = 'Codeigniter';
 $config['site_description'] = '';
-$config['site_version'] = 'v2.2.0-EDIT';
-$config['email_replay'] = 'no-reply@mydomain.com';
+$config['site_version'] = 'TEST Alberto Romero';
+$config['email_replay'] = 'contacto@albertoromero.info';
 
 /*
 |--------------------------------------------------------------------------

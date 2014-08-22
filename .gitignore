@@ -25,9 +25,9 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-uploads/*
-!uploads/index.html
-!uploads/.htaccess
+upload/*
+!upload/index.html
+!upload/.htaccess
 
 node_modules
 

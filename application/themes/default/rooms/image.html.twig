@@ -1,0 +1,66 @@
+{% extends _panel %}
+{% block content %}
+<div class="col-lg-12">
+    <div class="portlet portlet-default">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h4>{{ hotel.name }}</h4>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="portlet-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="userfile">Escoger Archivo</label>
+                    <input type="file" id="userfile" name="userfile">
+                    <p class="help-block">.gif, .jpg, .png</p>
+                </div>
+                <button type="submit" class="btn btn-labeled btn-green">
+                    <span class="btn-label"><i class="fa fa-check"></i></span>Guardar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="portlet portlet-default">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h4>Imagenes</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#rooms"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="rooms" class="panel-collapse collapse">
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for image in images %}
+                            <tr>
+                                <td>
+                                    <img src="{{ path~'/'~image.name }}"></img>
+                                </td>
+                                <td>
+                                    <a href="{{ site_url('rooms/delete/'~room.id) }}" title="Eliminar">
+                                        <button class="btn btn-red add-on" type="button"><i class="fa fa-trash-o"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

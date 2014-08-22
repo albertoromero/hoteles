@@ -30,7 +30,7 @@
                                     <td>{{ hotel.checkin }}</td>
                                     <td>{{ hotel.checkout }}</td>
                                     <td>
-                                        <a href="{{ site_url('hotels/add_2/'~hotel.id) }}" title="Habitaciones">
+                                        <a href="{{ site_url('rooms/add/'~hotel.id) }}" title="Habitaciones">
                                             <button class="btn btn-default add-on" type="button"><i class="fa fa-home"></i></button>
                                         </a>
                                         <a href="{{ site_url('hotels/edit/'~hotel.id) }}" title="Editar">

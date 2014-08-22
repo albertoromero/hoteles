@@ -75,7 +75,8 @@ $autoload['helper'] = array(
     'url',
     'debug',
     'app',
-    'language'
+    'language',
+    'form'
 );
 
 

@@ -28,9 +28,9 @@ class AppModel extends CI_Model
     }
 
     /**
-     * Retorna os campos
+     * Return fields
      *
-     * @param boolean $database Caso queira que seja retornado todos os campos da tabela
+     * @param boolean $database Return all fields
      * @return array
      */
     public function getFields($database = false)

@@ -20,7 +20,7 @@ class Hotels extends AppController {
      * Add hotel to database
      *
      */
-    public function add_1()
+    public function add()
     {
         if ($this->input->post()) {
             $this->form_validation->set_rules('name', 'Nombre', 'trim|required');
@@ -56,51 +56,75 @@ class Hotels extends AppController {
 
                     if ($hotel && !empty($hotel)) {
                         $this->session->set_flashdata(App::MSG_SUCCESS, 'Registrado correctamente!');
-                        redirect(site_url('hotels/add_2'));
+                        redirect(site_url('rooms/add/'.$hotel));
                     }
                 }
            }
         }
         $this->title('Hoteles')
-             ->display('hotels/add_1');
+             ->display('hotels/add');
     }
 
     /**
-     * Add room to database
+     * Edit Hotel
      *
      */
-    public function add_2($hotels_id = null)
+    public function edit($id)
     {
-        if ($this->input->post()) {
-            $this->form_validation->set_rules('name', 'Nombre', 'trim|required');
-            $this->form_validation->set_rules('description', 'Descripcion', 'required');
+        try {
+            if (empty($id)) {
+                throw new Exception('Error ID');
+            }
 
-            if ($this->form_validation->run()) {
+            if ($this->input->post()) {
+                $this->form_validation->set_rules('name', 'Nombre', 'trim|required');
+                $this->form_validation->set_rules('description', 'Descripcion', 'required');
+                $this->form_validation->set_rules('address', 'Direccion', 'required');
+                $this->form_validation->set_rules('checkin', 'Check-in', 'required|valid_date[Y-m-d]');
+                $this->form_validation->set_rules('checkout', 'Check-out', 'required|valid_date[Y-m-d]');
 
-                $name = $this->input->post('name');
-                $description = $this->input->post('description');
+                if ($this->form_validation->run()) {
 
-                $room = $this->Room->add(
-                    array(
-                        'name' => $name,
-                        'description' => $description,
-                        'hotels_id' => $hotels_id
-                    )
-                );
+                    $name = $this->input->post('name');
+                    $description = $this->input->post('description');
+                    $address = $this->input->post('address');
+                    $checkin = $this->input->post('checkin');
+                    $checkout = $this->input->post('checkout');
 
-                if ($room && !empty($room)) {
-                    $this->session->set_userdata('lastRoomId', $room);
-                    $this->session->set_flashdata(App::MSG_SUCCESS, 'Registrado correctamente!');
-                    redirect(site_url('hotels/add_2/'.$hotels_id));
-                }
-           }
-        }
+                    //Validar si la fecha de checkin es inferior al dia actual
+                    $hoy = date('Y-m-d');
+                    if(strcmp($checkin,$hoy) < 0) {
+                        $this->form_validation->set_post_validation_error('error_checkin', 'Check-In tiene que ser una fecha actual.');
+                    } else if(strcmp($checkin,$checkout) > 0) {
+                        $this->form_validation->set_post_validation_error('error_checkin', 'Check-In tiene que ser menor que Check-out.');
+                    } else {
+                        $data = array(
+                            'name' => $name,
+                            'description' => $description,
+                            'address' => $address,
+                            'checkin' => $checkin,
+                            'checkout' => $checkout
+                        );
 
-        $this->title('Habitaciones')
-             ->set('rooms', $this->Room->getAllBy('hotels_id', $hotels_id))
-             ->set('hotel', $this->Hotel->getById($hotels_id))
-             ->display('hotels/add_2');
+                        if ($this->Hotel->edit($data, $id)) {
+                            $this->session->set_flashdata(App::MSG_SUCCESS, 'Editado correctamente!');
+                            redirect(site_url('hotels'));
+                        } else {
+                            $this->form_validation->set_post_validation_error('errror_save', 'No fue posible editar.');
+                        }
+
+                    }
+               }
+            }
+
+            $this->title('Hoteles')
+                 ->set('hotel', $this->Hotel->getById($id))
+                 ->display('hotels/edit');
+        } catch (Exception $e) {
+            show_404();
+        }        
     }
+
 
     public function delete($hotel_id) {
         $result = $this->Hotel->getById($hotel_id);

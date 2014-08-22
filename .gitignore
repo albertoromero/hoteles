@@ -1,0 +1,34 @@
+!.gitignore
+
+##### Global files
+.ftpquota
+*.zip
+*.rar
+.svn
+.DS_Store
+thumbs.db
+error_log
+*~
+*.log
+##### Codeigniter files
+
+*user_guide
+application/config/database.php
+application/config/development
+application/config/testing
+application/config/production
+application/cache/*
+!application/cache/index.html
+!application/cache/.htaccess
+
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+
+uploads/*
+!uploads/index.html
+!uploads/.htaccess
+
+node_modules
+
+/vendor/

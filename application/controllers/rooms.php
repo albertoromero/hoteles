@@ -221,4 +221,21 @@ class Rooms extends AppController {
              ->display('rooms/image');    	
     }
 
+
+    public function delete_img($id) {
+        $result = $this->Image->getById($id);
+        $rooms_id = $result['rooms_id'];
+        if ($id != null && is_numeric($id)) {
+            if (unlink(APPPATH.'../upload/'.$rooms_id.'/'.$result['name'])) {
+                if($this->Image->delete($id)) {
+                    $this->session->set_flashdata(App::MSG_SUCCESS, 'Eliminado correctamente!');
+                    redirect(site_url('rooms/images/'.$rooms_id));
+                } else {
+                    $this->session->set_flashdata('Error', 'No fue posible eliminar el registro!');
+                    redirect(site_url('rooms/images/'.$rooms_id));
+                }
+            }
+        }
+    }
+
 }

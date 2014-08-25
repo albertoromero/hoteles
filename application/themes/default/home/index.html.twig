@@ -33,7 +33,7 @@
                         <h3>{{ hotel.name }}</h3>
                         <p>{{ hotel.description }}</p>
                         <p>
-                            <!-- <a href="#" class="btn btn-primary">Reservar!</a>  --><a href="#" class="btn btn-default">Saber más</a>
+                            <!-- <a href="#" class="btn btn-primary">Reservar!</a>  --><a href="{{ site_url('hotels/info/'~hotel.id) }}" class="btn btn-default">Saber más</a>
                         </p>
                     </div>
                 </div>

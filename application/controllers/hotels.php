@@ -7,6 +7,8 @@ class Hotels extends AppController {
         parent::__construct();
         isset($this->Hotel) or $this->load->model('Hotel');
         isset($this->Room) or $this->load->model('Room');
+        isset($this->Condition) or $this->load->model('Condition');
+        isset($this->Image) or $this->load->model('Image');
     }
 
     public function index() {
@@ -137,6 +139,30 @@ class Hotels extends AppController {
                 redirect(site_url('hotels'));
             }
         }
+    }
+
+    public function info($id) {
+        $rooms = $this->Room->getAllBy('hotels_id', $id);
+        $hotel =  $this->Hotel->getById($id);
+        $images = array();
+        foreach ($rooms as $key=>$room) {
+            $images_aux = array();
+            $conditions = $this->Condition->getAllBy('rooms_id', $room['id']);
+            $rooms[$key]['conditions'] = $conditions;
+            $image = $this->Image->getAllBy('rooms_id', $room['id']);
+            $images_aux[] = $image;
+            foreach ($images_aux as $image) {
+                foreach ($image as $photo) {
+                    $images[] = site_url('upload/'.$room['id'].'/'.$photo['name']);;
+                }  
+            }
+            $rooms[$key]['image'] = site_url('upload/'.$room['id'].'/'.$image[0]['name']);
+        }
+        $this->title('Habitaciones')
+             ->set('images', $images)
+             ->set('rooms', $rooms)
+             ->set('hotel', $this->Hotel->getById($id))
+             ->display('hotels/info');    
     }
 
 }

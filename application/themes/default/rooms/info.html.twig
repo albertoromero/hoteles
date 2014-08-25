@@ -1,0 +1,36 @@
+{% extends _layout %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        {% for condition in conditions %}
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                <div class="caption-full">
+                    <form accept-charset="UTF-8" role="form" method="post" action="{{ site_url('reserves/add') }}">
+                        <input type="hidden" name="price" value="{{ condition.price }}"/>
+                        <input type="hidden" name="hotels_id" value="{{ hotels_id }}"/>
+                        <input type="hidden" name="rooms_id" value="{{ rooms_id }}"/>
+                        <input type="hidden" name="conditions_id" value="{{ condition.id }}"/>
+                        <h4 class="pull-right">{{ condition.price }} <i class="fa fa-eur"></i></h4>
+                        <h4><a href="#">{{ condition.description }}</a></h4>
+                        <p>{{ condition.extra }}</p>
+                        <p>{{ condition.maxperson }} personas</p>
+                        <label>Cantidad</label>
+                        <input type="number" name="qtd" class="form-control" placeholder="1" min="0" max="{{ condition.qtd }}">
+                        <label>Entrada</label>
+                        <input type="date" name="checkin" class="form-control">
+                        <label>Salida</label>
+                        <input type="date" name="checkout" class="form-control">
+                        <p></p>
+                        <button type="submit" class="btn btn-info">Reservar!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

@@ -238,4 +238,16 @@ class Rooms extends AppController {
         }
     }
 
+    public function info($id) {
+        $conditions = $this->Condition->getAllBy('rooms_id', $id);
+        $hotel = $this->Room->getById($id);
+        $hotel_id = $hotel['hotels_id'];
+        $this->title('Habitaciones')
+             ->set('rooms_id', $id)
+             ->set('hotels_id', $hotel_id)
+             ->set('conditions', $conditions)
+             ->set('hotel', $this->Hotel->getById($id))
+             ->display('rooms/info');    
+    }
+
 }

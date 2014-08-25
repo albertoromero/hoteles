@@ -1,0 +1,81 @@
+{% extends _layout %}
+
+{% block content %}
+<div class="col-lg-12">
+    <div class="portlet portlet-default">
+        <div class="portlet-heading">
+            <div class="clearfix"></div>
+        </div>
+        <form accept-charset="UTF-8" role="form" method="post">
+            <input type="hidden" name="conditions_id" value="{{ condition.id }}"/>
+            <input type="hidden" name="hotels_id" value="{{ hotel.id }}"/>
+            <input type="hidden" name="rooms_id" value="{{ room.id }}"/>
+            <div class="form-group">
+                <label>Hotel</label>
+                <input name="hotel" type="text" class="form-control" readonly value="{{ hotel.name }}">
+            </div>
+            <div class="form-group">
+                <label>Habitación</label>
+                <input name="room" type="text" class="form-control" readonly value="{{ room.name }}">
+            </div> 
+            <div class="form-group">
+                <label>Descripción</label>
+                <textarea class="form-control" name="description" readonly>{{ room.description }}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Detalles</label>
+                <textarea class="form-control" name="extra" readonly>{{ condition.extra }}</textarea>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label>Entrada</label>
+                    <input type="date" name="checkin" readonly value="{{ reserva.checkin }}" class="form-control">
+                </div>
+                <div class="col-lg-6">
+                    <label>Salida</label>
+                    <input type="date" name="checkout" readonly value="{{ reserva.checkout }}"  class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                <div class="col-lg-4">
+                    <label>Personas</label>
+                        <input type="number" name="qtd" class="form-control" readonly value="{{reserva.qtd}}">
+                    </select>
+                </div>
+                    <div class="col-lg-4">
+                        <label>Precio</label>
+                        <div class="input-group">
+                            <input name="price" type="number" step="any" class="form-control" readonly value="{{ reserva.price }}">
+                            <span class="input-group-addon"><i class="fa fa-eur"></i></span>
+                        </div>
+                </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Cantidad</label>
+                            <input type="number" name="qtd" class="form-control" readonly value="{{reserva.qtd}}">
+                        </div>
+                    </div>
+                </div>
+                    <div class="clearfix"></div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="email" name="email" class="form-control" placeholder="Introduzca su email">
+                </div>
+                <div class="col-lg-6">
+                    <button type="submit" class="btn btn-info">
+                        Confirmar reserva
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

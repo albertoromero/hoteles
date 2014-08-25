@@ -1,0 +1,75 @@
+{% extends _layout %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row carousel-holder">
+                <div class="col-md-12">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            {% for image in images %}
+                            {% if loop.first %}
+                            <div class="item active">
+                                <img class="slide-image" src="{{ image }}" alt="">
+                            </div>
+                            {% else %}
+                            <div class="item">
+                                <img class="slide-image" src="{{ image }}" alt="">
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"></a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Descripcion</label>
+                        <textarea class="form-control" name="description" placeholder="Descripcion" disabled>{{ hotel.description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input name="address" type="text" class="form-control" value="{{ hotel.address }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Check-in a partir de</label>
+                        <input type="date" name="checkin" class="form-control" value="{{ hotel.checkin }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Check-out hasta</label>
+                        <input type="date" name="checkout" class="form-control" value="{{ hotel.checkout }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            {% for room in rooms %}
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="{{ room.image }}" alt="">
+                        <div class="caption">
+                            <h4><a href="{{ site_url('rooms/info/'~room.id) }}">{{ room.name }}</a>
+                            </h4>
+                            <p>{{ room.description }}</p>
+                            <a href="{{ site_url('rooms/info/'~room.id) }}" class="btn btn-default">Saber más</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

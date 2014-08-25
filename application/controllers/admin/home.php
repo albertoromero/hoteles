@@ -12,11 +12,14 @@ class Home extends AdminController
         parent::__construct();
         $this->twiggy->title()->append($this->config->item('site_description'));
         $this->checkIsLoged();
+        isset($this->Hotel) or $this->load->model('Hotel');
     }
 
     public function index()
     {
-        $this->display('home/index');
+        $this->title('Hoteles')
+             ->set('hotels', $this->Hotel->getAll())
+             ->display('hotels/index');
     }
 }
 

@@ -99,6 +99,7 @@ class AppModel extends CI_Model
             } else {
                 $this->db->from($this->table);
             }
+            $this->orderBy(array('id' => 'DESC'));
             return $this->db->get()->result_array();
         }
         return false;

@@ -2,30 +2,29 @@
 
 class Home extends AppController
 {
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *      http://example.com/index.php/home
-     *  - or -
-     *      http://example.com/index.php/home/index
-     *  - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/home/<method_name>
-     * @see http://codeigniter.com/user_guide/general/urls.html
-     */
     public function __construct()
     {
         parent::__construct();
         $this->twiggy->title()->append($this->config->item('site_description'));
+        isset($this->Hotel) or $this->load->model('Hotel');
+        isset($this->Room) or $this->load->model('Room');
+        isset($this->Condition) or $this->load->model('Condition');
+        isset($this->Image) or $this->load->model('Image');
     }
 
     public function index()
     {
-        $this->display('home/index');
+        $hotels = $this->Hotel->getAll();
+        foreach ($hotels as $key=>$hotel) {
+            $rooms = $this->Room->getAllBy('hotels_id', $hotel['id']);
+            $hotels[$key]['rooms'] = $rooms;
+            $image = $this->Image->getBy('rooms_id', $rooms[0]['id']);
+            $hotels[$key]['image'] = site_url('upload/'.$rooms[0]['id'].'/'.$image['name']);
+        }
+
+        $this->title('Inicio')
+             ->set('hotels', $hotels)
+             ->display('home/index');
     }
 }
 

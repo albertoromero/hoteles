@@ -44,6 +44,7 @@ $route['404_override'] = '';
 $route['admin']								 = 'admin/users/login';
 $route['login']                              = 'admin/users/login';
 $route['logout']                             = 'admin/users/logout';
+$route['panel']                              = 'admin/home/index';
 
 $route['page/(:any)']                        = 'page/view/$1';
 

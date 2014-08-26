@@ -1,0 +1,28 @@
+{% extends _panel %}
+{% block content %}
+<div class="col-lg-12">
+    <div class="portlet portlet-default">
+        <h4>Relatório</h4>
+        <div class="portlet-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Hotel</th>
+                            <th>Reservas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for report in reports %}
+                        <tr>
+                            <td>{{ report.name }}</td>
+                            <td>{{ report.total }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -11,7 +11,8 @@ class Hotels extends AppController {
         isset($this->Image) or $this->load->model('Image');
     }
 
-    public function index() {
+    public function index() 
+    {
 
         $this->title('Hoteles')
              ->set('hotels', $this->Hotel->getAll())
@@ -128,7 +129,8 @@ class Hotels extends AppController {
     }
 
 
-    public function delete($hotel_id) {
+    public function delete($hotel_id) 
+    {
         $result = $this->Hotel->getById($hotel_id);
         if ($hotel_id != null && is_numeric($hotel_id)) {
             if($this->Hotel->delete($hotel_id)) {
@@ -141,7 +143,8 @@ class Hotels extends AppController {
         }
     }
 
-    public function info($id) {
+    public function info($id) 
+    {
         $rooms = $this->Room->getAllBy('hotels_id', $id);
         $hotel =  $this->Hotel->getById($id);
         $images = array();

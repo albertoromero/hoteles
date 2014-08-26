@@ -1,0 +1,60 @@
+{% extends _panel %}
+
+{% block content %}
+<form accept-charset="UTF-8" role="form" method="post">
+	<div class="row">
+        <div class="col-lg-12">
+		    <div class="form-group">
+		            <label for="date" class="col-sm-1 control-label">Seleccione</label>
+		        <div class="col-lg-4">
+		            <input type="date" name="day" class="form-control">
+		        </div>
+		        <div class="col-lg-6">
+		            <button type="submit" class="btn btn-labeled btn-green">
+		                <span class="btn-label"><i class="fa fa-check"></i></span>Aceptar
+		            </button>
+		        </div>
+		    </div>
+	    </div>
+	</div>
+</form>
+{% if reports %}
+<div class="col-lg-12">
+    <div class="portlet portlet-default">
+        <h4>Relatório</h4>
+        <div class="portlet-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Hotel</th>
+                            <th>Habitación</th>
+                            <th>Condiciones</th>
+                            <th>Checkin</th>
+                            <th>Checkout</th>
+                            <th>Valor</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for report in reports %}
+                        <tr>
+                            <td>{{ report.hotel }}</td>
+                            <td>{{ report.room }}</td>
+                            <td>{{ report.condition }}</td>
+                            <td>{{ report.checkin }}</td>
+                            <td>{{ report.checkout }}</td>
+                            <td>{{ report.price }}</td>
+                            <td>{{ report.email }}</td>
+                            <td>{{ report.date }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

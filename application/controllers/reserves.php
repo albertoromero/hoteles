@@ -81,5 +81,5 @@ class Reserves extends AppController
     }
 }
 
-/* End of file reserva.php */
-/* Location: ./application/controllers/reserva.php */
+/* End of file reserves.php */
+/* Location: ./application/controllers/reserves.php */
